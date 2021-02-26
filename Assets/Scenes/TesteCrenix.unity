@@ -208,7 +208,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 212764776}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 741159178}
+        m_MethodName: ResetGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &212764776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,7 +506,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 8.75}
-  m_SizeDelta: {x: 163.06567, y: 52.698624}
+  m_SizeDelta: {x: 102.37079, y: 52.698624}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &340928803
 MonoBehaviour:
@@ -522,7 +533,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 67
+    m_MaxSize: 100
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -783,6 +794,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3042024265776694967, guid: b5374f7730806f4459837d2c8b1e7bba,
+        type: 3}
+      propertyPath: currentSlot
+      value: 
+      objectReference: {fileID: 1051415442}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5374f7730806f4459837d2c8b1e7bba, type: 3}
 --- !u!1 &521147066
@@ -949,6 +965,53 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 795510673}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &741159177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 741159179}
+  - component: {fileID: 741159178}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &741159178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741159177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55be84d257db3f46a0cb967389a016e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nuggetSpeech: {fileID: 340928803}
+  inventory: {fileID: 993610620}
+  initialText: ENCAIXE AS ENGRENAGENS EM QUALQUER ORDEM
+  successText: "YAY, PARABENS. TASK CONCLU\xCDDA!"
+--- !u!4 &741159179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741159177}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 294.6477, y: 147.86462, z: -201.3125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &758373816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,6 +1224,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3042024265776694967, guid: 3e4a57c7819f7d643867ac7a5ba76a7a,
+        type: 3}
+      propertyPath: currentSlot
+      value: 
+      objectReference: {fileID: 1323456386}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e4a57c7819f7d643867ac7a5ba76a7a, type: 3}
 --- !u!1 &831008234
@@ -1476,6 +1544,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3042024265776694967, guid: 0b817fccaed5b1d498d973ebb6f186e9,
+        type: 3}
+      propertyPath: currentSlot
+      value: 
+      objectReference: {fileID: 363297374}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b817fccaed5b1d498d973ebb6f186e9, type: 3}
 --- !u!1001 &930204594
@@ -1610,6 +1683,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3042024265776694967, guid: f73f341f6a79c944fad23f177dd3b472,
+        type: 3}
+      propertyPath: currentSlot
+      value: 
+      objectReference: {fileID: 1274235546}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f73f341f6a79c944fad23f177dd3b472, type: 3}
 --- !u!1 &993610619
@@ -1641,19 +1719,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19bd917dcff58b246ace06c2effc85b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arraySlots: []
-  arrayButtonSlots: []
   arraySlotsFull: 0000000000
+  arraySlotsInventoryFull: 0101010101
   hasPinkGear: 1
   hasGreenGear: 1
   hasYellowGear: 1
   hasBlueGear: 1
   hasPurpleGear: 1
   pinkGearPlaced: 0
-  greeGearPlaced: 0
+  greenGearPlaced: 0
   yellowGearPlaced: 0
   blueGearPlaced: 0
   purpleGearPlaced: 0
+  allGearsPlaced: 0
   upperSlots:
   - {fileID: 1323456380}
   - {fileID: 1051415437}
@@ -2033,6 +2111,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3042024265776694967, guid: dfb0f076d634f7c44848b7999b701b58,
+        type: 3}
+      propertyPath: currentSlot
+      value: 
+      objectReference: {fileID: 1936849874}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfb0f076d634f7c44848b7999b701b58, type: 3}
 --- !u!1 &1221932006

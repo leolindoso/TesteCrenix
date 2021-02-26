@@ -41,8 +41,8 @@ public class GearObject : MonoBehaviour
     {
         return gear;
     }
-    public void AddGearToInvetory()
-    {
-        inventory.AddItemToInventory(gameObject);
-    }
+    // public void AddGearToInvetory()
+    // {
+    //     inventory.AddItemToInventory(gameObject);
+    // }
 }

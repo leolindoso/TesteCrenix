@@ -12,6 +12,7 @@ public class GearGenericScript : MonoBehaviour
     [SerializeField] private bool isButton;
     [Header("General Variables")]
     [SerializeField] private Gear gear;
+    [SerializeField] private GearSlot currentSlot;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,10 @@ public class GearGenericScript : MonoBehaviour
 
     }
 
+    public void SetCurentSlot(GearSlot gearSlot)
+    {
+        currentSlot = gearSlot;
+    }
     public GameObject GetGearSlot()
     {
         return gearSlot.gameObject;
@@ -54,12 +59,15 @@ public class GearGenericScript : MonoBehaviour
             GameObject auxGear = null;
             if (gearSlot.GetIfItsFromInventory())
             {
-                if (!inventory.GetArraySlotsFull()[index] && !gearSlot.GetGearPlaced())
+
+                if (!inventory.GetArraySlotsInventoryFull()[index] && !gearSlot.GetGearPlaced())
                 {
+
                     auxGear = Instantiate(gearButton, gearSlot.transform);
-                    // auxGear.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
                     gearSlot.SetGearPlaced(auxGear);
-                    inventory.AddItemToInventory(auxGear);
+                    inventory.AddItemToInventory(index, auxGear);
+                    inventory.DeleteGearFromSlots(currentSlot.GetId() - 1, gear.GetGearColor());
+                    auxGear.GetComponent<GearGenericScript>().SetCurentSlot(gearSlot);
                     return auxGear;
                 }
                 return null;
@@ -69,7 +77,9 @@ public class GearGenericScript : MonoBehaviour
                 if (!inventory.GetArraySlotsFull()[index] && !gearSlot.GetGearPlaced())
                 {
                     auxGear = Instantiate(gearObject, gearSlot.transform);
-                    inventory.DeleteGearFromInventory(index, true, gear.GetGearColor());
+                    inventory.DeleteGearFromInventory(currentSlot.GetId() - 1, gear.GetGearColor());
+                    inventory.AddItemToSlots(index, auxGear);
+                    auxGear.GetComponent<GearGenericScript>().SetCurentSlot(gearSlot);
                     return auxGear;
                 }
                 return null;
@@ -82,7 +92,7 @@ public class GearGenericScript : MonoBehaviour
     {
         if (isButton)
         {
-            if (other.CompareTag("GearSlot") || other.CompareTag("GearInventorySlot"))
+            if (other.CompareTag("GearSlot"))
             {
                 gearSlot = other.gameObject.GetComponent<GearSlot>();
             }

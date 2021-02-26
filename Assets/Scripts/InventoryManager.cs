@@ -5,9 +5,8 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     [Header("Slots Management Variables")]
-    [SerializeField] private Transform[] arraySlots;
-    [SerializeField] private GearSlot[] arrayButtonSlots;
     [SerializeField] private bool[] arraySlotsFull;
+    [SerializeField] private bool[] arraySlotsInventoryFull;
     [Header("Gears Inventory Variables")]
     [SerializeField] private bool hasPinkGear;
     [SerializeField] private bool hasGreenGear;
@@ -16,10 +15,11 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private bool hasPurpleGear;
     [Header("Gear Placed Variables")]
     [SerializeField] private bool pinkGearPlaced;
-    [SerializeField] private bool greeGearPlaced;
+    [SerializeField] private bool greenGearPlaced;
     [SerializeField] private bool yellowGearPlaced;
     [SerializeField] private bool blueGearPlaced;
     [SerializeField] private bool purpleGearPlaced;
+    [SerializeField] private bool allGearsPlaced;
     [Header("Gear Slots Variables")]
     [SerializeField] private GameObject[] upperSlots;
     [SerializeField] private GameObject[] lowerSlots;
@@ -27,15 +27,21 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         // arrayButtonSlots = new GameObject[5];
-        arraySlotsFull = new bool[5];
+        // arraySlotsFull = new bool[5];
+        // arraySlotsInventoryFull = new bool[5];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (blueGearPlaced && greeGearPlaced && pinkGearPlaced && yellowGearPlaced && purpleGearPlaced)
+        if (blueGearPlaced && greenGearPlaced && pinkGearPlaced && yellowGearPlaced && purpleGearPlaced)
         {
             StartRotation();
+            allGearsPlaced = true;
+        }
+        else
+        {
+            allGearsPlaced = false;
         }
     }
     public bool GetIfPinkGearIsOnInventory()
@@ -58,21 +64,29 @@ public class InventoryManager : MonoBehaviour
     {
         return hasPurpleGear;
     }
+    public bool GetAllGearsPlaced()
+    {
+        return allGearsPlaced;
+    }
+    public bool[] GetArraySlotsInventoryFull()
+    {
+        return arraySlotsInventoryFull;
+    }
     public bool[] GetArraySlotsFull()
     {
         return arraySlotsFull;
     }
 
 
-    public void DeleteGearFromInventory(int index, bool flag, GearColor gearColor)
+    public void DeleteGearFromInventory(int index, GearColor gearColor)
     {
-        arraySlotsFull[index] = false;
-        Debug.Log(index);
+
         switch (gearColor)
         {
             case GearColor.Pink:
                 if (hasPinkGear)
                 {
+                    arraySlotsInventoryFull[index] = false;
                     pinkGearPlaced = true;
                     hasPinkGear = false;
                 }
@@ -80,31 +94,15 @@ public class InventoryManager : MonoBehaviour
             case GearColor.Green:
                 if (hasGreenGear)
                 {
-                    // for (int i = 0; i < arrayButtonSlots.Length; i++)
-                    // {
-                    //     if (arrayButtonSlots[i] != null && arrayButtonSlots[i].GetGearPlaced().CompareTag("GreenGear"))
-                    //     {
-                    //         Destroy(arrayButtonSlots[i]);
-                    //         arrayButtonSlots[i] = null;
-                    //         arraySlotsFull[i] = false;
-                    //     }
-                    // }
-                    greeGearPlaced = true;
+                    arraySlotsInventoryFull[index] = false;
+                    greenGearPlaced = true;
                     hasGreenGear = false;
                 }
                 break;
             case GearColor.Yellow:
                 if (hasYellowGear)
                 {
-                    // for (int i = 0; i < arrayButtonSlots.Length; i++)
-                    // {
-                    //     if (arrayButtonSlots[i] != null && arrayButtonSlots[i].GetGearPlaced().CompareTag("YellowGear"))
-                    //     {
-                    //         Destroy(arrayButtonSlots[i]);
-                    //         arrayButtonSlots[i] = null;
-                    //         arraySlotsFull[i] = false;
-                    //     }
-                    // }
+                    arraySlotsInventoryFull[index] = false;
                     yellowGearPlaced = true;
                     hasYellowGear = false;
                 }
@@ -112,15 +110,7 @@ public class InventoryManager : MonoBehaviour
             case GearColor.Blue:
                 if (hasBlueGear)
                 {
-                    // for (int i = 0; i < arrayButtonSlots.Length; i++)
-                    // {
-                    //     if (arrayButtonSlots[i] != null && arrayButtonSlots[i].GetGearPlaced().CompareTag("BlueGear"))
-                    //     {
-                    //         Destroy(arrayButtonSlots[i]);
-                    //         arrayButtonSlots[i] = null;
-                    //         arraySlotsFull[i] = false;
-                    //     }
-                    // }
+                    arraySlotsInventoryFull[index] = false;
                     blueGearPlaced = true;
                     hasBlueGear = false;
                 }
@@ -128,17 +118,56 @@ public class InventoryManager : MonoBehaviour
             case GearColor.Purple:
                 if (hasPurpleGear)
                 {
-                    //     for (int i = 0; i < arrayButtonSlots.Length; i++)
-                    //     {
-                    //         if (arrayButtonSlots[i] != null && arrayButtonSlots[i].GetGearPlaced().CompareTag("PurpleGear"))
-                    //         {
-                    //             Destroy(arrayButtonSlots[i]);
-                    //             arrayButtonSlots[i] = null;
-                    //             arraySlotsFull[i] = false;
-                    //         }
-                    //     }
+                    arraySlotsInventoryFull[index] = false;
                     purpleGearPlaced = true;
                     hasPurpleGear = false;
+                }
+                break;
+        }
+    }
+    public void DeleteGearFromSlots(int index, GearColor gearColor)
+    {
+
+        switch (gearColor)
+        {
+            case GearColor.Pink:
+                if (hasPinkGear)
+                {
+                    arraySlotsFull[index] = false;
+                    pinkGearPlaced = false;
+                    hasPinkGear = true;
+                }
+                break;
+            case GearColor.Green:
+                if (hasGreenGear)
+                {
+                    arraySlotsFull[index] = false;
+                    greenGearPlaced = false;
+                    hasGreenGear = true;
+                }
+                break;
+            case GearColor.Yellow:
+                if (hasYellowGear)
+                {
+                    arraySlotsFull[index] = false;
+                    yellowGearPlaced = false;
+                    hasYellowGear = true;
+                }
+                break;
+            case GearColor.Blue:
+                if (hasBlueGear)
+                {
+                    arraySlotsFull[index] = false;
+                    blueGearPlaced = false;
+                    hasBlueGear = true;
+                }
+                break;
+            case GearColor.Purple:
+                if (hasPurpleGear)
+                {
+                    arraySlotsFull[index] = false;
+                    purpleGearPlaced = false;
+                    hasPurpleGear = true;
                 }
                 break;
         }
@@ -157,112 +186,101 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-    public void AddItemToInventory(GameObject gear)
+    public void AddItemToInventory(int index, GameObject gear)
     {
-        bool exitLoop = false;
-        bool gearAdded = false;
-        Debug.Log("Adicionando ao inventario");
-        for (int i = 0; i < arraySlotsFull.Length; i++)
+        if (!arraySlotsInventoryFull[index])
         {
-            if (!arraySlotsFull[i])
+            switch (gear.tag)
             {
-                Debug.Log("Esse Slot[" + i + "] ta Vazio");
-                switch (gear.tag)
-                {
-                    case "PinkGear":
+                case "PinkGear":
 
-                        if (!hasPinkGear)
-                        {
-                            // GameObject buttonObject = Instantiate(gearButton, arraySlots[i]);
-                            // arrayButtonSlots[i] = buttonObject;
-                            hasPinkGear = true;
-                            arraySlotsFull[i] = true;
-                            exitLoop = true;
-                            gearAdded = true;
-                        }
-
-                        break;
-                    case "GreenGear":
-
-                        if (!hasGreenGear)
-                        {
-                            // GameObject buttonObject = Instantiate(gearButton, arraySlots[i]);
-                            // arrayButtonSlots[i] = buttonObject;
-                            hasGreenGear = true;
-                            arraySlotsFull[i] = true;
-                            exitLoop = true;
-                            gearAdded = true;
-                        }
-
-                        break;
-                    case "YellowGear":
-
-                        if (!hasYellowGear)
-                        {
-                            // GameObject buttonObject = Instantiate(gearButton, arraySlots[i]);
-                            // arrayButtonSlots[i] = buttonObject;
-                            hasYellowGear = true;
-                            arraySlotsFull[i] = true;
-                            exitLoop = true;
-                            gearAdded = true;
-                        }
-
-                        break;
-                    case "BlueGear":
-
-                        if (!hasBlueGear)
-                        {
-                            // GameObject buttonObject = Instantiate(gearButton, arraySlots[i]);
-                            // arrayButtonSlots[i] = buttonObject;
-                            hasBlueGear = true;
-                            arraySlotsFull[i] = true;
-                            exitLoop = true;
-                            gearAdded = true;
-                        }
-
-                        break;
-                    case "PurpleGear":
-
-                        if (!hasPurpleGear)
-                        {
-                            // GameObject buttonObject = Instantiate(gearButton, arraySlots[i]);
-                            // arrayButtonSlots[i] = buttonObject;
-                            hasPurpleGear = true;
-                            arraySlotsFull[i] = true;
-                            exitLoop = true;
-                            gearAdded = true;
-                        }
-
-                        break;
-                }
-
-                if (exitLoop)
-                {
+                    if (!hasPinkGear)
+                    {
+                        hasPinkGear = true;
+                        arraySlotsInventoryFull[index] = true;
+                    }
                     break;
-                };
+                case "GreenGear":
+
+                    if (!hasGreenGear)
+                    {
+                        hasGreenGear = true;
+                        arraySlotsInventoryFull[index] = true;
+                    }
+                    break;
+                case "YellowGear":
+
+                    if (!hasYellowGear)
+                    {
+                        hasYellowGear = true;
+                        arraySlotsInventoryFull[index] = true;
+                    }
+                    break;
+                case "BlueGear":
+
+                    if (!hasBlueGear)
+                    {
+                        hasBlueGear = true;
+                        arraySlotsInventoryFull[index] = true;
+                    }
+                    break;
+                case "PurpleGear":
+
+                    if (!hasPurpleGear)
+                    {
+                        hasPurpleGear = true;
+                        arraySlotsInventoryFull[index] = true;
+                    }
+                    break;
             }
         }
-        // if (!gearAdded)
-        // {
-        //     switch (gear.GetItemName())
-        //     {
-        //         case "Red gear":
-        //             redgearAmount++;
-        //             break;
-        //         case "White gear":
-        //             whitegearAmount++;
-        //             break;
-        //         case "Orange gear":
-        //             orangegearAmount++;
-        //             break;
-        //         case "Blue gear":
-        //             bluegearAmount++;
-        //             break;
-        //         case "Black gear":
-        //             blackgearAmount++;
-        //             break;
-        //     }
-        //     Destroy(gear.gameObject);
-        // }
+    }
+    public void AddItemToSlots(int index, GameObject gear)
+    {
+        bool exitLoop = false;
+        Debug.Log("Adicionando ao Slot");
+
+        if (!arraySlotsFull[index])
+        {
+            Debug.Log("Esse Slot do Array[" + index + "] ta Vazio");
+            switch (gear.tag)
+            {
+                case "PinkGear":
+
+                    arraySlotsFull[index] = true;
+                    pinkGearPlaced = true;
+                    exitLoop = true;
+
+                    break;
+                case "GreenGear":
+
+                    arraySlotsFull[index] = true;
+                    greenGearPlaced = true;
+                    exitLoop = true;
+
+                    break;
+                case "YellowGear":
+
+                    arraySlotsFull[index] = true;
+                    yellowGearPlaced = true;
+                    exitLoop = true;
+
+                    break;
+                case "BlueGear":
+
+                    arraySlotsFull[index] = true;
+                    blueGearPlaced = true;
+                    exitLoop = true;
+
+                    break;
+                case "PurpleGear":
+
+                    arraySlotsFull[index] = true;
+                    purpleGearPlaced = true;
+                    exitLoop = true;
+
+                    break;
+            }
+        }
     }
 }

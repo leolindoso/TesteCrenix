@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7685778119971300108}
   m_Layer: 0
   m_Name: Pink Gear
-  m_TagString: Untagged
+  m_TagString: PinkGear
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
